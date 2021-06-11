@@ -49,7 +49,6 @@ con <- DBI::dbConnect(RSQLite::SQLite(), "meu_sqlite_db.db")
 tidypredict_sql(xgb_fit$fit, con)
 
 copy_to(con, data, "data", overwrite = TRUE)
-
 db_list_tables(con)
 
 data_sql <- tbl(con, "data") %>%
