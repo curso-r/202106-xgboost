@@ -179,6 +179,7 @@ modelo_xgb <- boost_tree(
 <img src="img/xgb_exemplo2.png" style=" display: block; margin-left: auto; margin-right: auto;width:500px"></img>
 </a>
 
+
 ---
 
 # XGBoost
@@ -188,6 +189,8 @@ modelo_xgb <- boost_tree(
 ### Coisas boas
 
 - Bom para dados tabulares. Preparado para bases arbitrariamente grandes.
+
+- Serve para classificação, regressão, séries temporais, ranqueamento, análise de sobrevivência.
 
 - Bom para quando precisamos de boas previsões.
 
