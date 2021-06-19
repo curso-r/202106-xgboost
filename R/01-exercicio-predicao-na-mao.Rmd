@@ -4,6 +4,12 @@ output: html_document
 ---
 
 ```{r}
+library(tidymodels)
+library(tidyverse)
+library(tidypredict)
+library(xgboost)
+library(DiagrammeR)
+
 # dados ----------------------------------------------------
 dados <- tribble(
   ~dose, ~remedio, ~eficacia,
@@ -59,8 +65,13 @@ ajusta_xgboost_e_mostra_as_arvores(1)
 ```{r}
 dados <- dados %>%
   mutate(
-    predicao_modelo1 = 0.5 # preencha aqui!
+    predicao_modelo1 = 0.5 + case_when(
+      remedio == "B" ~ 6.29999971,
+      TRUE ~ -0.699999988
+    )
   )
+
+mean((dados$eficacia - dados$predicao_modelo1)^2)
 ```
 
 
@@ -75,7 +86,19 @@ ajusta_xgboost_e_mostra_as_arvores(2)
 
 ```{r}
 dados <- dados %>%
+  mutate(remedioA = ifelse(remedio == "A", 1, 0)) %>%
   mutate(
-    predicao_modelo2 = 0.5 # preencha aqui!
-  )
+    predicao_modelo2 = 0.5 + case_when(
+      remedio == "B" ~ 6.29999971,
+      TRUE ~ -0.699999988
+    ) + case_when(
+      remedio == "B" & dose <  5 ~  -1.9599998,
+      remedio == "B" & dose >= 5 ~ 3.17333364,
+      remedio == "A" & dose < 5 ~  -4.05999994,
+      remedio == "A" & dose >= 5 ~ 1.07333326
+    )
+  ) 
+
+mean((dados$eficacia - dados$predicao_modelo2)^2)
+
 ```

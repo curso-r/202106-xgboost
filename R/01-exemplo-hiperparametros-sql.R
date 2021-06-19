@@ -28,7 +28,7 @@ xgb_model <- boost_tree(
   loss_reduction = 0,
   learn_rate = 0.3,
   tree_depth = 2,
-  trees = 3
+  trees = 2
 ) %>%
   set_engine("xgboost", lambda = 0) %>%
   set_mode("regression")
@@ -62,4 +62,6 @@ data_sql
 # SQL por trás dos panos
 show_query(data_sql)
 
+f(dose = 8) = 0.0 + (1.20000005) + (0.840000033) + 0.5
+f(dose = 8) = -10 + 3 *8
 
